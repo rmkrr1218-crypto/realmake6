@@ -16,6 +16,8 @@
   const colorStatus = document.getElementById("colorStatus");
   const colorHint = document.getElementById("colorHint");
   const saveHint = document.getElementById("saveHint");
+  const consultSaveButton = document.getElementById("consultSaveButton");
+  const consultStatus = document.getElementById("color-consult-status");
   const savePreview = document.getElementById("savePreview");
   const savePreviewImage = document.getElementById("savePreviewImage");
   const saveDebug = document.getElementById("saveDebug");
@@ -479,6 +481,8 @@
   // ボタンの状態と、初めての人向けの案内を現在の操作に合わせる
   function updateUI() {
     const hasImage = Boolean(state.image), selected = hasSelection();
+    consultSaveButton.disabled = !hasImage;
+    consultStatus.textContent = state.saveNotice || "画像は自動送信されません。保存した画像をLINEのトークに添付してください。";
     workspace.classList.toggle("has-image", hasImage); simulator.classList.toggle("has-image", hasImage); simulator.classList.toggle("is-pan-mode", state.tool === "pan");
     sampleNotice.hidden = !state.isSample;
     // 自動選択はタップだけで完了するため、写真の上でも縦スワイプでページをスクロールできるようにする（touch-action切替）
@@ -588,6 +592,7 @@
   function setSaveNotice(message, capabilities, error = null) {
     state.saveNotice = message;
     saveHint.textContent = message;
+    consultStatus.textContent = message;
     if (capabilities) updateSaveDebug(capabilities, error);
   }
   function clearSavePreview() {
@@ -639,6 +644,7 @@
     }
   }
 
+  consultSaveButton.addEventListener("click", () => buttons.save.click());
   buttons.save.addEventListener("click", async () => {
     if (!state.image) return;
     // ローカルHTTPではWeb Share APIを使わず、公開後のHTTPS環境で使えることを明確に案内する
@@ -654,7 +660,7 @@
       if (isIosDevice()) { await saveForIos(blob); return; }
       // PC・Mac Safariは通常のPNGダウンロードを使う
       const objectUrl = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = objectUrl; link.download = "real-make-exterior-simulation.png"; document.body.append(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-      state.saveNotice = "緑の選択表示を含まない高画質PNGを保存しました。"; saveHint.textContent = state.saveNotice;
+      state.saveNotice = "画像のダウンロードを開始しました。保存先を確認して、LINEのトークに画像を添付してください。"; saveHint.textContent = state.saveNotice; consultStatus.textContent = state.saveNotice;
     } catch (error) {
       console.error("PNG保存に失敗しました。", error);
       const capabilities = getShareCapabilities();

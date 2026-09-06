@@ -14,6 +14,7 @@
     <title>外壁カラーシミュレーター｜Real Make（リアルメイク）</title>
     <link rel="stylesheet" href="../assets/css/site.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/simulator-consult.css" />
     <script src="../assets/js/nav.js" defer></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCG1M6JXX0"></script>
     <script>
@@ -185,7 +186,7 @@
 
         <div class="presentation-actions editor-only" aria-label="完成イメージの確認">
           <button id="presentationButton" class="button button-presentation" type="button" disabled>完成イメージを見る</button>
-          <button id="editReturnButton" class="button button-primary" type="button" hidden>編集に戻る</button>
+          <button id="editReturnButton" class="button button-primary" type="button" hidden>編集・保存・相談に戻る</button>
         </div>
 
         <div class="bottom-actions editor-only" aria-label="比較と保存">
@@ -197,6 +198,17 @@
         <section id="savePreview" class="save-preview editor-only" hidden aria-live="polite">
           <img id="savePreviewImage" alt="保存用の外壁カラーシミュレーション画像" />
           <p>画像を長押しして「写真に保存」を選んでください。</p>
+        </section>
+        <section class="rm-consult editor-only" id="color-consult" aria-labelledby="color-consult-title">
+          <p class="rm-consult-label">気になる色が見つかったら</p>
+          <h2 id="color-consult-title">この色、わが家に合う？<br>画像を添えて相談できます。</h2>
+          <p>まだ色を決めていなくても大丈夫です。気になる画像を保存してLINEに添付してください。代表の大川が色選びのご相談に対応します。</p>
+          <div class="rm-consult-actions">
+            <button id="consultSaveButton" class="rm-consult-button" type="button" disabled>1．相談用の画像を保存</button>
+            <a class="rm-consult-button rm-consult-line" href="https://lin.ee/sEbKJ6O" target="_blank" rel="noopener" data-ga-location="color_simulator_result">2．この色をLINEで相談する</a>
+          </div>
+          <p id="color-consult-status" class="rm-consult-status" role="status" aria-live="polite">画像は自動送信されません。保存した画像をLINEのトークに添付してください。</p>
+          <p class="rm-consult-note">LINEを追加した後、トーク画面を開いて画像を添付してください。サンプル画像でのご相談も可能です。表示色はイメージのため、実際の色は色見本などで確認します。</p>
         </section>
         <details id="saveDebug" class="save-debug editor-only" hidden>
           <summary>開発確認：保存の動作状況</summary>

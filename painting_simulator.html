@@ -10,6 +10,7 @@
 <title>外壁・屋根塗装 簡易見積もりシミュレーター｜Real Make</title>
 <meta name="description" content="外壁・屋根塗装の概算費用を、建物の大きさや工事内容から確認できるReal Makeの無料シミュレーターです。">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/simulator-consult.css">
 <style>
 :root {
   --navy:    #1a2f5e;
@@ -391,9 +392,9 @@ const PHONE_URL = 'tel:09014340189';
 
 <!-- ステップバー -->
 <div class="steps-bar">
-  <div class="si active" id="si1"><div class="num">1</div><div class="slabel">建物・塗料</div></div>
+  <div class="si active" id="si1"><div class="num">1</div><div class="slabel">建物の大きさ</div></div>
   <div class="sarrow">›</div>
-  <div class="si" id="si2"><div class="num">2</div><div class="slabel">屋根・工事</div></div>
+  <div class="si" id="si2"><div class="num">2</div><div class="slabel">屋根について</div></div>
   <div class="sarrow">›</div>
   <div class="si" id="si3"><div class="num">✓</div><div class="slabel">結果</div></div>
 </div>
@@ -405,20 +406,26 @@ const PHONE_URL = 'tel:09014340189';
 ============================================================ -->
 <div class="panel active" id="p1">
   <div class="card">
-    <div class="card-title"><span class="step-badge">STEP 1</span>建物・外壁塗料</div>
+    <div class="card-title"><span class="step-badge">STEP 1</span>建物の大きさを教えてください</div>
+    <p class="estimate-help">分かる範囲で大丈夫です。塗料や工事の専門知識がなくても、費用の目安を確認できます。</p>
 
     <!-- 坪数 -->
     <div class="fg">
       <label class="fl" for="tsubo">建物の坪数</label>
-      <select class="sel" id="tsubo">
+      <select class="sel" id="tsubo" aria-describedby="estimate-size-help">
         <option value="20">20坪（外壁約80㎡）</option>
         <option value="25">25坪（外壁約95㎡）</option>
         <option value="30" selected>30坪（外壁約120㎡）</option>
         <option value="35">35坪（外壁約140㎡）</option>
         <option value="40">40坪（外壁約160㎡）</option>
+        <option value="30-unknown">分からない（30坪の条件で仮計算）</option>
       </select>
+      <p class="estimate-help" id="estimate-size-help">土地の広さではなく、建物の大きさの目安を選んでください。外壁面積は上記の仮定値で計算し、実測値ではありません。</p>
     </div>
 
+    <details class="estimate-options" id="wall-options">
+      <summary>塗料・コーキングを詳しく設定する（任意）</summary>
+      <p class="estimate-help">初期設定はラジカル制御型シリコンとコーキング打ち替えです。工法が適しているかは、現地確認後にご案内します。</p>
     <!-- 外壁塗料 -->
     <div class="fg">
       <label class="fl">外壁塗料グレード
@@ -450,9 +457,10 @@ const PHONE_URL = 'tel:09014340189';
         <label for="c_non">なし</label>
       </div>
     </div>
+    </details>
 
     <div class="nav-btns">
-      <button class="btn-next" onclick="goStep(2)">次へ　›</button>
+      <button class="btn-next" onclick="goStep(2)">次へ：屋根について　›</button>
     </div>
   </div>
 </div>
@@ -462,17 +470,25 @@ const PHONE_URL = 'tel:09014340189';
 ============================================================ -->
 <div class="panel" id="p2">
   <div class="card">
-    <div class="card-title"><span class="step-badge">STEP 2</span>屋根・付帯工事</div>
+    <div class="card-title"><span class="step-badge">STEP 2</span>屋根も塗装を検討していますか？</div>
 
     <!-- 屋根塗装 -->
     <div class="fg">
       <label class="fl">屋根塗装</label>
       <div class="rg" style="margin-bottom:12px">
         <input type="radio" name="roofYN" id="rf_y" value="yes" checked onchange="toggleExpand('roofExp',true)">
-        <label for="rf_y">する</label>
+        <label for="rf_y">屋根も検討する</label>
         <input type="radio" name="roofYN" id="rf_n" value="no" onchange="toggleExpand('roofExp',false)">
-        <label for="rf_n">しない</label>
+        <label for="rf_n">外壁のみ</label>
+        <input type="radio" name="roofYN" id="rf_unknown" value="unknown" onchange="toggleExpand('roofExp',true)">
+        <label for="rf_unknown">分からない</label>
       </div>
+      <p class="estimate-help">「分からない」は屋根塗装ありの条件で仮計算します。瓦など塗装が不要な屋根もあるため、必要性は現地で確認します。</p>
+    </div>
+    <details class="estimate-options" id="work-options">
+      <summary>屋根の塗料・付帯工事を詳しく設定する（任意）</summary>
+      <p class="estimate-help">屋根塗料の初期設定はシリコン／ラジカル制御型です。軒天・雨樋・破風・ベランダ防水は、ここで選んだ場合のみ概算に加算されます。</p>
+    <div class="fg">
       <div class="expand open" id="roofExp">
         <label class="fl">屋根塗料の種類</label>
         <div class="rg">
@@ -557,9 +573,11 @@ const PHONE_URL = 'tel:09014340189';
       </div>
     </div>
 
+    </details>
+    <p class="estimate-help">このまま進む場合、軒天・雨樋・破風・ベランダ防水は初期設定では含みません。必要な工事は現地確認後にご案内します。</p>
     <div class="nav-btns">
       <button class="btn-back" onclick="goStep(1)">‹ 戻る</button>
-      <button class="btn-next" onclick="calcAndShow()">見積もりを見る　›</button>
+      <button class="btn-next" onclick="calcAndShow()">概算費用を見る　›</button>
     </div>
   </div>
 </div>
@@ -575,6 +593,7 @@ const PHONE_URL = 'tel:09014340189';
     <div class="input-summary">
       <h3>▸ 入力内容</h3>
       <div class="stags" id="summaryTags"></div>
+      <p id="estimate-exclusions" class="estimate-help"></p>
     </div>
 
     <!-- 合計バナー -->
@@ -592,12 +611,14 @@ const PHONE_URL = 'tel:09014340189';
     </div>
 
     <!-- 内訳テーブル -->
+    <div class="estimate-breakdown" role="region" aria-label="工事費用の内訳。狭い画面では左右にスクロールできます" tabindex="0">
     <table class="dtable">
       <thead>
         <tr><th>工事内容</th><th>最安</th><th>目安</th><th>最高</th></tr>
       </thead>
       <tbody id="detailBody"></tbody>
     </table>
+    </div>
 
     <!-- 工期 -->
     <div class="dur-badge">
@@ -611,10 +632,27 @@ const PHONE_URL = 'tel:09014340189';
       正確な金額は現地調査・お見積りにてご確認ください。建物形状・劣化状況・下地状態によって実際の費用は変動します。
     </div>
 
-    <!-- 問い合わせ -->
-    <div class="contact-actions" aria-label="問い合わせ方法">
-      <a class="contact-btn btn-line-result" href="https://lin.ee/sEbKJ6O" target="_blank" rel="noopener">結果をLINEで送って相談する</a>
-      <a class="contact-btn btn-line-photo" href="https://lin.ee/sEbKJ6O" target="_blank" rel="noopener">写真を送って正確な金額を聞く</a>
+    <section class="rm-consult" id="estimate-consult" aria-labelledby="estimate-consult-title">
+      <p class="rm-consult-label">次は、わが家の条件で相談</p>
+      <h2 id="estimate-consult-title">この概算をもとに、<br>大川に相談できます。</h2>
+      <p>まだ工事を決めていなくても大丈夫です。入力条件と金額をコピーして、LINEのトークに貼り付けてお送りください。</p>
+      <div class="rm-consult-actions">
+        <button class="rm-consult-button" id="estimate-copy" type="button">1．相談文をコピーする</button>
+        <a class="rm-consult-button rm-consult-line" href="https://lin.ee/sEbKJ6O" target="_blank" rel="noopener" data-ga-location="simulator_result">2．LINEを開いて相談する</a>
+      </div>
+      <p id="estimate-copy-status" class="rm-consult-status" role="status" aria-live="polite">コピーだけでは送信されません。LINEで貼り付け・送信してください。</p>
+      <details id="estimate-copy-details">
+        <summary>送る相談文を確認する・手動でコピーする</summary>
+        <label for="estimate-message">入力条件と概算金額（読み取り専用）</label>
+        <textarea id="estimate-message" rows="10" readonly></textarea>
+        <p>自動コピーできない場合は、上の文章を選択してコピーできます。</p>
+      </details>
+      <p class="rm-consult-note">LINEを追加した後、トーク画面を開いてください。建物の写真も添付すると相談内容が伝わりやすくなります。正確な金額は現地確認後にご案内します。</p>
+    </section>
+
+    <!-- その他の問い合わせ -->
+    <div class="contact-actions rm-consult-other" aria-label="その他の問い合わせ方法">
+      <a class="contact-btn btn-line-photo" href="photo-estimate/">写真で、より具体的な概算を相談する</a>
       <a class="contact-btn btn-phone-consult" href="tel:09014340189" data-phone-link>電話で直接相談する</a>
       <a class="contact-btn btn-contact-form" href="contact/index.html">フォームで相談する</a>
     </div>
@@ -686,7 +724,7 @@ function calcAndShow() {
   const t     = TSUBO_TABLE[tVal];
   const wG    = document.querySelector('input[name="wg"]:checked').value;
   const caulk = document.querySelector('input[name="caulk"]:checked').value;
-  const doRf  = document.getElementById('rf_y').checked;
+  const doRf  = document.getElementById('rf_y').checked || document.getElementById('rf_unknown').checked;
   const rfG   = document.querySelector('input[name="roofG"]:checked').value;
   const doVer = document.getElementById('vr_y').checked;
   const verM  = document.querySelector('input[name="verM"]:checked').value;
@@ -781,14 +819,16 @@ function calcAndShow() {
   const addonMap = { ck_nok:'軒天塗装', ck_toi:'雨樋塗装', ck_hafu:'破風塗装' };
   const addonTags = Object.entries(addonMap).filter(([id])=>document.getElementById(id).checked).map(([,v])=>v);
   const tags = [
-    `${tVal}坪（外壁約${t.wall}㎡）`,
+    document.getElementById('tsubo').value === '30-unknown' ? `坪数不明：30坪・外壁約${t.wall}㎡の条件で仮計算` : `${tVal}坪（外壁約${t.wall}㎡）`,
     `外壁：${PRICES.wall[wG].label}`,
     caulk !== 'none' ? `コーキング${caulk==='replace'?'打ち替え':'増し打ち'}` : null,
-    doRf ? `屋根：${PRICES.roof[rfG].label}` : '屋根塗装なし',
+    doRf ? `屋根：${PRICES.roof[rfG].label}${document.getElementById('rf_unknown').checked ? '（必要性不明のため塗装ありで仮計算）' : ''}` : '屋根塗装なし',
     ...addonTags,
     doVer ? 'ベランダ防水' : null,
   ].filter(Boolean);
   document.getElementById('summaryTags').innerHTML = tags.map(t=>`<span class="stag">${t}</span>`).join('');
+  const excluded = [[doNok,'軒天'],[doToi,'雨樋'],[doHafu,'破風'],[doVer,'ベランダ防水']].filter(([included])=>!included).map(([,name])=>name);
+  document.getElementById('estimate-exclusions').textContent = excluded.length ? `この概算に含まれていない工事：${excluded.join('・')}。必要な場合は別途費用がかかります。` : '付帯工事・ベランダ防水は、選択した条件で計算しています。';
 
   goStep(3);
 }
@@ -807,11 +847,14 @@ function resetSim() {
   document.getElementById('verExp').classList.remove('open');
   document.getElementById('verArea').value = '10';
   ['ck_nok','ck_toi','ck_hafu'].forEach(id => document.getElementById(id).checked = false);
+  document.getElementById('wall-options').open = false;
+  document.getElementById('work-options').open = false;
   currentStep = 0;
   goStep(1);
 }
 
 function f(n) { return Math.round(n).toLocaleString('ja-JP'); }
 </script>
+<script src="assets/js/estimate-consult.js"></script>
 </body>
 </html>
