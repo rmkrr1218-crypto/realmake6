@@ -13,6 +13,49 @@
   <link rel="canonical" href="https://realmake-okegawa.github.io/realmake6/">
   <title>Real Make（リアルメイク）｜桶川市周辺の外壁塗装・屋根塗装</title>
   <link rel="stylesheet" href="./assets/css/home-notion.css">
+  <style id="home-works-card-layout">
+    /* Top-page works cards only; shared styles and other sections stay unchanged. */
+    #works .rm-works-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
+    #works .rm-work-card { border-radius: 10px; box-shadow: none; }
+    #works .rm-work-card > a { display: flex; flex-direction: column; height: 100%; }
+    #works .rm-work-photo { position: relative; overflow: hidden; background: #e7ebe6; }
+    #works .rm-work-photo img { width: 100%; height: auto; aspect-ratio: 1.2; object-fit: cover; transition: transform .2s ease; }
+    #works .rm-work-badge { position: absolute; top: 14px; left: 14px; padding: 5px 11px; background: #fff; color: var(--rm-navy); font-size: 13px; font-weight: 800; line-height: 1.6; border-radius: 3px; }
+    #works .rm-work-arrow { position: absolute; right: 14px; bottom: 14px; display: grid; place-items: center; width: 42px; height: 42px; background: #fff; color: var(--rm-navy); border-radius: 50%; font-size: 25px; line-height: 1; }
+    #works .rm-work-body { display: flex; flex-direction: column; flex: 1; padding: 20px; }
+    #works .rm-work-meta { margin-bottom: 8px; font-size: 14px; }
+    #works .rm-work-card h3 { margin-bottom: 20px; font-size: 21px; line-height: 1.6; }
+    #works .rm-work-phrase { display: inline-block; }
+    #works .rm-center-link { margin-top: 28px; }
+    #works .rm-work-numbers { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; margin: auto 0 0; padding: 15px 0; border-block: 1px solid var(--rm-line); }
+    #works .rm-work-numbers dt { color: var(--rm-muted); font-size: 13px; line-height: 1.7; }
+    #works .rm-work-numbers dd { margin: 4px 0 0; color: var(--rm-navy); font-size: 26px; font-weight: 800; line-height: 1.4; white-space: nowrap; font-variant-numeric: tabular-nums; }
+    #works .rm-work-numbers dd small { font-size: 14px; margin-left: 2px; }
+    #works .rm-work-note { margin: 12px 0 0; color: var(--rm-muted); font-size: 14px; line-height: 1.8; }
+    #works .rm-work-detail { margin-top: 16px; color: var(--rm-green-dark); font-size: 14px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+    #works .rm-work-card > a:hover .rm-work-detail { text-decoration-thickness: 2px; }
+    #works .rm-work-card > a:focus-visible { outline: 3px solid var(--rm-green-dark); outline-offset: -3px; }
+    @media (hover: hover) {
+      #works .rm-work-card > a:hover .rm-work-photo img { transform: scale(1.025); }
+    }
+    @media (min-width: 821px) and (max-width: 1100px) {
+      #works .rm-works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 820px) {
+      #works .rm-works-grid { grid-template-columns: 1fr; gap: 28px; }
+      #works .rm-work-photo img { aspect-ratio: 1.32; }
+      #works .rm-work-numbers { grid-template-columns: 1.4fr 1fr; }
+    }
+    @media (max-width: 360px) {
+      #works .rm-work-body { padding: 17px; }
+      #works .rm-work-numbers { gap: 8px; }
+      #works .rm-work-numbers dd { font-size: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #works .rm-work-photo img { transition: none; }
+      #works .rm-work-card > a:hover .rm-work-photo img { transform: none; }
+    }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCG1M6JXX0"></script>
   <script src="./assets/js/site-analytics.js"></script>
 </head>
@@ -133,9 +176,51 @@
           <p>地域のお住まいで実際に行った工事を、施工前後の写真と基本情報とともにご紹介します。</p>
         </div>
         <div class="rm-works-grid">
-          <article class="rm-work-card"><a href="./works/okegawa-kamogawa-bluegray/"><img src="./assets/optimized/page/assets/img/works/okegawa-kamogawa-after-north.webp" alt="桶川市鴨川の外壁塗装施工後"><div class="rm-work-body"><p class="rm-work-meta">桶川市鴨川｜外壁塗装</p><h3>色を変えて、印象を一新する</h3><ul class="rm-work-facts"><li>費用 120〜150万円</li><li>工期 約1ヶ月</li><li>築16年</li><li>屋根は施工なし</li></ul></div></a></article>
-          <article class="rm-work-card"><a href="./works/okegawa-kawatagaya-clear/"><img src="./assets/optimized/page/assets/img/works/okegawa-kawatagaya-after-lookup.webp" alt="桶川市川田谷の外壁塗装施工後"><div class="rm-work-body"><p class="rm-work-meta">桶川市川田谷｜クリヤー塗装</p><h3>レンガの柄を残して、色あせを回復</h3><ul class="rm-work-facts"><li>費用 130〜150万円</li><li>工期 約1ヶ月</li><li>築15年</li><li>屋根は施工なし</li></ul></div></a></article>
-          <article class="rm-work-card"><a href="./works/okegawa-sakata-black/"><img src="./assets/img/works/sakata-w13-final-1.webp" alt="桶川市坂田の外壁・屋根塗装施工後"><div class="rm-work-body"><p class="rm-work-meta">桶川市坂田｜外壁・屋根塗装</p><h3>艶を落として、真っ黒に仕上げる</h3><ul class="rm-work-facts"><li>費用 110〜130万円</li><li>工期 約20日</li><li>築12年</li><li>外壁・屋根を施工</li></ul></div></a></article>
+          <article class="rm-work-card">
+            <a href="./works/okegawa-kamogawa-bluegray/">
+              <div class="rm-work-photo"><img src="./assets/optimized/page/assets/img/works/okegawa-kamogawa-after-north.webp" alt="桶川市鴨川の外壁塗装施工後" loading="lazy"><span class="rm-work-badge">外壁塗装</span><span class="rm-work-arrow" aria-hidden="true">↗</span></div>
+              <div class="rm-work-body"><p class="rm-work-meta">桶川市鴨川 F様邸</p><h3>色を変えて、印象を一新する</h3>
+                <dl class="rm-work-numbers"><div><dt>費用（税込）</dt><dd>120〜150<small>万円</small></dd></div><div><dt>工期</dt><dd>約1ヶ月</dd></div></dl>
+                <p class="rm-work-note">築16年 ／ ブルーグレーと白の塗り分け。瓦屋根のため屋根塗装なし。</p><span class="rm-work-detail">写真・使用塗料を詳しく見る →</span>
+              </div>
+            </a>
+          </article>
+          <article class="rm-work-card">
+            <a href="./works/okegawa-kawatagaya-clear/">
+              <div class="rm-work-photo"><img src="./assets/optimized/page/assets/img/works/okegawa-kawatagaya-after-lookup.webp" alt="桶川市川田谷の外壁塗装施工後" loading="lazy"><span class="rm-work-badge">外壁・クリヤー塗装</span><span class="rm-work-arrow" aria-hidden="true">↗</span></div>
+              <div class="rm-work-body"><p class="rm-work-meta">桶川市川田谷 K様邸</p><h3>レンガの柄を残して、<span class="rm-work-phrase">色あせを回復</span></h3>
+                <dl class="rm-work-numbers"><div><dt>費用（税込）</dt><dd>130〜150<small>万円</small></dd></div><div><dt>工期</dt><dd>約1ヶ月</dd></div></dl>
+                <p class="rm-work-note">築15年 ／ レンガ調の柄を生かす透明塗装。瓦屋根のため屋根塗装なし。</p><span class="rm-work-detail">写真・使用塗料を詳しく見る →</span>
+              </div>
+            </a>
+          </article>
+          <article class="rm-work-card">
+            <a href="./works/okegawa-sakata-black/">
+              <div class="rm-work-photo"><img src="./assets/img/works/sakata-w13-final-1.webp" alt="桶川市坂田の外壁・屋根塗装施工後" loading="lazy"><span class="rm-work-badge">外壁・屋根塗装</span><span class="rm-work-arrow" aria-hidden="true">↗</span></div>
+              <div class="rm-work-body"><p class="rm-work-meta">桶川市坂田 K様邸</p><h3>艶を落として、真っ黒に仕上げる</h3>
+                <dl class="rm-work-numbers"><div><dt>費用（税込）</dt><dd>110〜130<small>万円</small></dd></div><div><dt>工期</dt><dd>約20日</dd></div></dl>
+                <p class="rm-work-note">築12年 ／ 外壁は艶を抑えた黒。屋根には遮熱塗料を採用。</p><span class="rm-work-detail">写真・使用塗料を詳しく見る →</span>
+              </div>
+            </a>
+          </article>
+          <article class="rm-work-card">
+            <a href="./works/saitama-iwatsuki-monier/">
+              <div class="rm-work-photo"><img src="./assets/img/works/iwatsuki-w07-step-5.webp" alt="さいたま市岩槻区のモニエル瓦屋根の塗装施工後" loading="lazy"><span class="rm-work-badge">屋根・付帯部塗装</span><span class="rm-work-arrow" aria-hidden="true">↗</span></div>
+              <div class="rm-work-body"><p class="rm-work-meta">さいたま市岩槻区 S様邸</p><h3>モニエル瓦を、洗ってから塗り替える</h3>
+                <dl class="rm-work-numbers"><div><dt>費用（税込）</dt><dd>85〜110<small>万円</small></dd></div><div><dt>工期</dt><dd>約25日</dd></div></dl>
+                <p class="rm-work-note">モニエル瓦 ／ ご予算に合わせて屋根と付帯部を施工。外壁塗装なし。</p><span class="rm-work-detail">写真・使用塗料を詳しく見る →</span>
+              </div>
+            </a>
+          </article>
+          <article class="rm-work-card">
+            <a href="./works/saitama-kita-mortar/">
+              <div class="rm-work-photo"><img src="./assets/img/works/saitama-kita-after-wide.webp" alt="さいたま市北区のモルタル外壁の塗装施工後" loading="lazy"><span class="rm-work-badge">外壁・付帯部塗装</span><span class="rm-work-arrow" aria-hidden="true">↗</span></div>
+              <div class="rm-work-body"><p class="rm-work-meta">さいたま市北区 F様邸</p><h3>梅雨の合間を縫って、外壁を塗り替える</h3>
+                <dl class="rm-work-numbers"><div><dt>費用（税込）</dt><dd>100〜120<small>万円</small></dd></div><div><dt>工期</dt><dd>約20日</dd></div></dl>
+                <p class="rm-work-note">モルタル外壁 ／ 3分艶の落ち着いた仕上がり。和瓦屋根のため屋根塗装なし。</p><span class="rm-work-detail">写真・使用塗料を詳しく見る →</span>
+              </div>
+            </a>
+          </article>
         </div>
         <p class="rm-center-link"><a class="rm-outline-button" href="./works/">施工事例をすべて見る →</a></p>
       </div>
